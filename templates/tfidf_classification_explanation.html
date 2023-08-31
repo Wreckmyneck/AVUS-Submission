@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Text Classification Explanation{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Understanding Text Classification</h1>
+    <p>Welcome to the Text Classification Explanation page. This section will guide you through the intricate process that our AI model undertakes to classify text, determining whether it originates from an AI source or a human writer.</p>
+
+    <h2>Text Preprocessing: Lowercasing and Stopword Removal</h2>
+    <p>At the outset, the text is subjected to preprocessing steps to standardize its format. All characters are converted to lowercase, ensuring uniformity across the document. Additionally, common words, known as stopwords, are eliminated. Stopwords, such as "the," "is," and "and," hold limited semantic value and can obstruct the detection of meaningful content.</p>
+
+    h2>TF-IDF Vectorization</h2>
+    <p>Term Frequency-Inverse Document Frequency (TF-IDF) is a numerical representation technique used to assess the significance of words within a document relative to a corpus of documents. The term frequency measures how frequently a word appears in a specific document, while the inverse document frequency gauges how distinct a word is across multiple documents. This process assigns higher weights to words that are both frequent within a document and unique across the corpus, resulting in a more discriminative representation.</p>
+
+    <h2>Difference: Plain TF-IDF vs. N-gram TF-IDF</h2>
+    <p>While plain TF-IDF considers individual words, N-gram TF-IDF also includes combinations of adjacent words (N-grams). This captures contextual information and can be more effective for distinguishing text patterns.</p>
+
+    <h2>Multinomial Naive Bayes for Text Classification</h2>
+    <p>Multinomial Naive Bayes is a prominent algorithm employed in text classification, a fundamental task in natural language processing. This algorithm utilizes probabilistic principles to categorize text into predefined classes. During the training phase, Multinomial Naive Bayes calculates the probabilities of observing different words within each class using the provided training data. It assumes that the presence of words in a text is independent of each other, given the class. This "naive" assumption simplifies the calculation of class probabilities and allows the algorithm to efficiently determine the most likely class for a given text. One of the key advantages of Multinomial Naive Bayes is its effectiveness in handling high-dimensional data, such as text, where the vocabulary can be extensive. It performs well even when the number of unique words (features) is significantly larger than the number of training examples. However, it's important to note that the naive assumption might not hold true for all types of text data, especially those with intricate relationships between words. In essence, Multinomial Naive Bayes is a probabilistic algorithm with applications in text classification. Its strength lies in its ability to efficiently process text data and estimate class probabilities based on the observed word occurrences.</p>
+
+    <h2>Understanding Your Result</h2>
+    <p>This model classified your text as: {{model3_text}}<br>{% if model3_text == "Human Written Text Detected" %} The model is {{model3_prob_human}}% confident this text is human written {% else %}The model is {{model3_prob_ai}}% confident this text is AI-generated{% endif %}<br>This model has been trained on Human and GPT3.5 generated sources, the training currently focused on news articles, blog posts (such as Reddit or Blogger), research paper abstracts, Stories, Book Summaries and reviews so texts that relate to these fields are particularly reliable.</p>
+
+    <h3>In Conclusion</h3>
+    <p>The comprehensive process detailed above underscores the methodology our AI model employs to accurately classify text as either AI-generated or human-authored. This intricate interplay of preprocessing, contextual analysis, numerical representation, and ensemble classification empowers the model to make informed and reliable categorizations. Feel free to explore the model's capabilities by experimenting with various text inputs.</p>
+
+    <!-- Button to Return to Index Page -->
+    <a href="/?return=1" class="btn btn-primary">Back to AVUS</a>
+</div>
+{% endblock %}

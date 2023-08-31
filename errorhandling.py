@@ -1,0 +1,2 @@
+class APIKeyAuthenticationErorr(Exception):
+    pass

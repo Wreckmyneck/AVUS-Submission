@@ -1,0 +1,168 @@
+
+.centered-content {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 960px; /* Adjust this value to control the maximum width of the content */
+  padding: 0 15px; /* Adjust this value to set the gap on large monitors */
+}
+/* Customizing Bootstrap's dark mode colors */
+:root {
+    --dark-mode-color: #343a40;
+    --dark-mode-text-color: #f8f9fa;
+}
+  
+/* Override Bootstrap's light mode colors with dark mode colors */
+body {
+    background-color: var(--dark-mode-color);
+    color: var(--dark-mode-text-color);
+}
+
+/* Navbar customization for dark mode */
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--dark-mode-text-color);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus {
+    color: #dcdcdc; /* Custom hover/focus color for dark mode */
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: var(--dark-mode-text-color);
+}
+
+.navbar-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='var(--dark-mode-text-color)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.container {
+    text-align: center;
+}
+
+.btn-container {
+    margin-top: 20px;
+}
+
+.heading-container {
+    margin-top: 50px;
+}
+
+.gpt-container {
+    margin-top: 20px;
+}
+
+.results-container {
+    margin-top: 100px;
+}
+
+.betweenresults-container {
+    margin-top: 50px;
+}
+
+.error {
+    color: red
+}
+
+.container {
+    position: relative;
+}
+
+.character-count-wrapper {
+    position: absolute;
+    color: black;
+    bottom: 10px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.0); /* Adjust the alpha value (0.5 in this example) */
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.highlighted-sentence {
+    background-color: #ff8c00;
+    color: white;
+    font-weight: bold;
+  }
+
+  .text-box {
+    max-height: 24em;
+    overflow-y: auto;
+}
+
+/* styles.css */
+.expand-collapse-header {
+    cursor: pointer;
+}
+
+.arrow {
+    display: inline-block;
+    transform: rotate(-90deg);
+    transition: transform 0.2s ease-in-out;
+}
+
+.line-by-line-content {
+    display: none;
+}
+
+.line-by-line-content.show {
+    display: block;
+}
+
+.perplexity-content {
+    display: none; /* Hide the content initially */
+}
+
+.perplexity-content.show {
+    display: block; /* Show the content when the show class is applied */
+}
+
+.tfidfngram-classification-model {
+    display: none; /* Hide the content initially */
+}
+
+.tfidfngram-classification-model.show {
+    display: block; /* Show the content when the show class is applied */
+}
+
+.tfidf-classification-model {
+    display: none; /* Hide the content initially */
+}
+
+.tfidf-classification-model.show {
+    display: block; /* Show the content when the show class is applied */
+}
+
+.burstiness-classification-model {
+    display: none; /* Hide the content initially */
+}
+
+.burstiness-classification-model.show {
+    display: block; /* Show the content when the show class is applied */
+}
+
+.expand-collapse-header {
+    cursor: pointer;
+}
+
+.arrow {
+    display: inline-block;
+    transform: rotate(-90deg);
+    transition: transform 0.2s ease-in-out;
+}
+
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.equation.math-equation {
+    border: 2px solid #3498db;
+    padding: 15px;
+    margin: 20px;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    text-align: center;
+    max-width: 80%;
+    line-height: 1.5;
+}

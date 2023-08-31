@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">About AVUS</h1>
+    <p>Welcome to AVUS, the AI-generated vs Human-written Detection Software.</p>
+    
+    <h2 class="mt-5">Development and Purpose</h2>
+    <p>AVUS was developed as part of the MSc Dissertation project at Queen's University Belfast (QUB) by Conor Buick under the guidance of Dr. Reza Rafiee. The project aimed to classify text as either AI generated or human written.</p>
+    
+    <h2 class="mt-5">Indicators and Models</h2>
+    <p>To achieve this task, four effective indicators and models were discovered:</p>
+
+        Perplexity readings of sentences<br>
+        Term-frequency-inverse-document-frequency of n-grams from the text<br>
+        Term-frequency-inverse-document-frequency of the text<br>
+        Burstiness of sentences in the text<br>
+
+    
+    <h2 class="mt-5">Performance</h2>
+    <p>The system boasts an accuracy score of 0.97 and an F1 score of 0.96 on text data related to the same topic-fields as the training data.</p>
+    
+    <h2 class="mt-5">Training Data</h2>
+    <p>The training data encompassed a variety of sources including scientific abstracts, news articles (including CNN), short stories, internet comments (e.g., blogger and reddit), and reviews (particularly hotel reviews).</p>
+    
+    <h2 class="mt-5">Functionality</h2>
+    <p>AVUS can process raw text input, text files, PDF files, and DOCX files. Additionally, it offers the ability to generate text from a GPT model provided the user has an API key.</p>
+    <!-- Button to Return to Index Page -->
+    <a href="/" class="btn btn-primary">Back to AVUS</a>
+</div>
+{% endblock %}

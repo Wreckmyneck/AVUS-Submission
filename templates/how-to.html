@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}How to Use - Detector{% endblock %}
+
+{% block content %}
+
+  <h1>How to use AVUS</h1>
+
+  <p>Welcome to AVUS! Our system is designed to help you analyze text using advanced detection models. Follow these steps to make the most out of your experience:</p>
+
+  <h2>Step 1: Input Your Text</h2>
+  <p>Begin by providing the text you want to analyze. The system accepts texts between 250 and 5000 characters. If your text exceeds this size, you can choose to upload a PDF, DOCX, or TXT file instead.</p>
+
+  <p class="text-muted">Note: Please be cautious when uploading PDF and DOCX files, as the conversion process may sometimes lead to unexpected formatting issues.</p>
+
+  <h2>Step 2: Process the Text</h2>
+  <p>Once you've entered your text or uploaded a file, click the "Process Text" button. The system will perform the following steps:</p>
+
+  <ul>
+    <li>Clean the text to remove any unnecessary formatting or special characters.</li>
+    <li>Analyze the text using three different detection models to provide a comprehensive assessment.</li>
+  </ul>
+
+  <h2>Step 3: Review the Results</h2>
+  <p>After the analysis is complete, you will see the results displayed on the page. The results are divided into two main sections:</p>
+
+  <h3>Overall Result</h3>
+  <p>This section provides a summary of the combined analysis results. It gives you a quick overview of the text's characteristics.</p>
+
+  <h3>Model Breakdown</h3>
+  <p>In this section, you'll find a detailed breakdown of the analysis performed by each detection model. This breakdown offers insights into how different aspects of the text were evaluated.</p>
+
+  <h2>Step 4: Line-by-Line Analysis</h2>
+  <p>For an even deeper understanding, you can explore the line-by-line analysis of the text. This feature allows you to see how each line is assessed by the detection models. To access this analysis:</p>
+
+  <ul>
+    <li>Click on the "Line-by-Line Analysis" section.</li>
+    <li>Each line of the text will be listed, and you can expand each line to view the corresponding analysis.</li>
+  </ul>
+
+  <h2>Step 5: Testing with Generated Text</h2>
+  <p>If you'd like to test the system using generated text from GPT models, you have that option as well. Keep in mind:</p>
+
+  <ul>
+    <li>For GPT-4 testing, you'll need to input an API key.</li>
+    <li>If you encounter any errors while testing, it's advisable to use your own OpenAI API key.</li>
+  </ul>
+
+  <p>Enjoy using our text analysis tool and gaining insights into the characteristics of the text you provide!</p>
+  
+<div class="container mt-4">
+  <!-- Button to Return to Index Page -->
+  <a href="/?return=1" class="btn btn-primary">Back to AVUS</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+    <div class="container">
+      <h1>{% block title %} AVUS {% endblock %}</h1>
+      <sub>{% block subtitle%} Human-written vs AI-generated Detection Software{% endblock %}</sub>
+
+      <form id = "buttons" method ="POST" action = "/" enctype="multipart/form-data">
+        <div class="btn-container">
+
+          <textarea class="form-control form-control-lg" id="textEntry" rows="1" name = "apikeyinput" placeholder="Input API key here. Response may take some time. (Required for GPT4 or if error given for rest)"></textarea>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              <div class="flash-messages">
+                {% for category, message in messages %}
+                  {% if category == 'error' %}
+                    <p class="error">{{ message }}</p>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endwith %}
+          <div class = "gpt-container">
+          <input type="submit" name = "action" class="btn btn-primary" value = "Generate GPT2 Text">
+          <input type="submit" name = "action" class="btn btn-primary" value = "Generate GPT3 Text">
+          <input type="submit" name = "action" class="btn btn-primary" value = "Generate ChatGPT(3.5) Text"> 
+          <input type="submit" name = "action" class="btn btn-primary" value = "Generate GPT4 Text">
+          </div>
+          
+        </div>
+        <div class="form-group heading-container">
+            {% if response %}
+            <div class = "container">
+              <textarea class="form-control form-control-lg" id="textEntry" rows="8" oninput="countCharacters(this)" name = "textboxinput" placeholder="Type your text here">{{response}}</textarea>
+              <div class = "character-count-wrapper">
+                <p id = "character-count">0</p>
+              </div>
+            </div>
+            {% else %}
+              <div class = "container">
+                <textarea class="form-control form-control-lg" id="textEntry" rows="8" oninput="countCharacters(this)" name = "textboxinput" placeholder="Type your text here"></textarea>
+                <div class = "character-count-wrapper">
+                  <p id = "character-count">0</p>
+                </div>
+              </div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+          <label for="file">Process text up to 5000 char or upload a PDF or TXT file for more:</label>
+          <input type="file" class="form-control-file" id="file" name="file" accept=".docx,.pdf,.txt">
+        </div>
+        <!-- <button type="submit" class="btn btn-primary">Upload</button> -->
+        <div class="btn-container">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="flash-messages">
+              {% for category, message in messages %}
+                {% if category == 'inputerror' %}
+                  <p class="error">{{ message }}</p>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+          <input type="submit" name = "action" class="btn btn-primary" value = "Process Text">
+        </div>
+      </form>
+      {% if average_perplexity %}
+          <div class="heading-container">
+            {% if file == True %}
+              <h2>Results</h2>
+              <h3>If results do not match expected outcome, copy and past sections of text into the box above.</h3>
+            {% else %}
+              <h2>Results</h2>
+            {% endif %}
+          </div>
+          <div class="results-container">
+            <h3>Your Text is: </h3>
+            <h4>{{ final_result }}</h4>
+          </div>
+
+          
+
+        <div class="betweenresults-container">
+          <h3 class="expand-collapse-header">Perplexity Model <span class="arrow">&#9660;</span></h3>
+          <div class="perplexity-content">
+              <p><strong>{{ average_perplexity }}</strong></p>
+              <a href="/perplexity_explanation">
+                <p>Click here for more info</p>
+            </a>
+          </div>
+      </div>
+
+      <div class="betweenresults-container">
+        <h3 class="expand-collapse-header">TF-IDF N-Gram Classification Model<span class="arrow">&#9660;</span></h3>
+        <div class="tfidfngram-classification-model"> 
+            <p><strong>{{ model2_classification }}</strong></p>
+            <p>This models predicted probability of it being human-written is: {{ model2_prob_human}}%</p>
+            <p>This models predicted probability of it being AI-generated is: {{ model2_prob_AI}}%</p>
+          </a>
+            <a href="/tfidf_ngram_classification_explanation"><p>Click here for more info</p></a>
+        </div>
+    </div>
+
+    <div class="betweenresults-container">
+      <h3 class="expand-collapse-header">TF-IDF Classification Model<span class="arrow">&#9660;</span></h3>
+      <div class="tfidf-classification-model"> 
+          <p><strong>{{ model3_classification }}</strong></p>
+          <p>This models predicted probability of it being human-written is: {{ model3_prob_human}}%</p>
+          <p>This models predicted probability of it being AI-generated is: {{ model3_prob_AI}}%</p>
+          <a href="/tfidf_classification_explanation"><p>Click here for more info</p></a>
+      </div>
+    </div>
+
+    <div class="betweenresults-container">
+      <h3 class="expand-collapse-header">Burstiness Classification Model<span class="arrow">&#9660;</span></h3>
+      <div class="burstiness-classification-model"> 
+          <p><strong>{{ burstiness_text }}</strong></p>
+          <p>This models predicted probability of it being human-written is: {{ burstiness_prob_human}}%</p>
+          <p>This models predicted probability of it being AI-generated is: {{ burstiness_prob_AI}}%</p>
+          <a href="/burstiness_classification_explanation"><p>Click here for more info</p></a>
+      </div>
+    </div>
+
+    <div class="betweenresults-container">
+      <h3 class="expand-collapse-header">Line-by-line analysis <span class="arrow">&#9660;</span></h3>
+      <div class="line-by-line-content">
+          {% for sentence in filtered_text %}
+          <p>{% set index = loop.index0 %}
+              {% if index in machine_lines %}
+              <span class="highlighted-sentence">{{ sentence }}</span>
+              {% else %}
+              <span>{{ sentence }}</span>
+              {% endif %}
+          </p>
+          {% endfor %}
+      </div>
+  </div>
+
+      
+      
+        
+      {% endif %}
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> <!-- needs to be first-->
+      <script src="js/bootstrap.min.js"></script>
+      <script>
+        function countCharacters(textarea) {
+          var characterCount = textarea.value.length;
+            if (characterCount < 250) {
+              $('#character-count').text(characterCount + "/250").css('color', 'red');
+            } else if (characterCount >= 250 && characterCount <= 5000) {
+              $('#character-count').text(characterCount + "/5000").css('color', 'black');  
+            } else if (characterCount > 5000) {
+              $('#character-count').text(characterCount + "/5000").css('color', 'red');
+            } else {
+              $('#character-count').text(characterCount + "/250").css('color', 'red');
+            }
+        }
+       
+          document.addEventListener("DOMContentLoaded", function () {
+              const container = document.querySelector(".container");
+
+              container.addEventListener("click", function (event) {
+                  const header = event.target.closest(".expand-collapse-header");
+                  if (header) {
+                      const content = header.nextElementSibling;
+                      if (content.classList.contains("line-by-line-content") || content.classList.contains("perplexity-content") || content.classList.contains("tfidfngram-classification-model") || content.classList.contains("tfidf-classification-model") || content.classList.contains("burstiness-classification-model")) {
+                          content.classList.toggle("show");
+                          const arrow = header.querySelector(".arrow");
+                          arrow.style.transform = content.classList.contains("show") ? "rotate(0)" : "rotate(-90deg)";
+                      }
+                  }
+              });
+          })
+          
+          
+
+      </script>
+    
+{% endblock %}

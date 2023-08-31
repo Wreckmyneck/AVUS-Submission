@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Understanding Text Classification</h1>
+    <p>Welcome to the Burstiness Text Classification Explanation page. This section will guide you through the intricate process that our AI model undertakes to classify text, determining whether it originates from an AI source or a human writer.</p>
+
+    <h2>Text processing</h2>
+    <p>The text is sent to be processed where it is split into individual sentences, each sentence has it's words counted and put into a frequency distrubution before they are flattened into singular features that can be analysed by an algorithm</p>
+
+    <h2>Support Vector Machines (SVMs)</h2>
+    <p>For this task a support vector machines (SVMs) model was used. SVMs are a powerful tool in the world of machine learning, designed to tackle classification and regression tasks. SVMs excel at handling complex relationships within data, making them a popular choice for a wide range of applications.</p>
+
+    <h2>Understanding Your Result</h2>
+    <p>This model classified your text as: {{burstiness_text}}<br>{% if burstiness_text == "Human Written Text Detected" %} The model is {{burstiness_prob_human}}% confident this text is human written {% else %}The model is {{burstiness_prob_ai}}% confident this text is AI-generated{% endif %}<br>This model has been trained on Human and GPT3.5 generated sources, the training currently focused on news articles, blog posts (such as Reddit or Blogger), research paper abstracts, Stories, Book Summaries and reviews so texts that relate to these fields are particularly reliable.</p>
+
+    <!-- Button to Return to Index Page -->
+    <a href="/?return=1" class="btn btn-primary">Back to AVUS</a>
+</div>
+{% endblock %}

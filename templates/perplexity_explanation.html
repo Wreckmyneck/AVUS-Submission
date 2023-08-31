@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Main Heading -->
+    <h1 class="mb-4">Perplexity and AI Text Detection</h1>
+
+    <!-- Perplexity Explained -->
+    <h2>What is Perplexity?</h2>
+    <p>
+        Perplexity is a mathematical metric used to evaluate the performance of language models in predicting the next word in a sequence. It measures the level of uncertainty or confusion that a language model experiences when trying to make predictions. A lower perplexity score indicates that the model is more confident and accurate in its predictions, while a higher perplexity score suggests the model struggles to predict the next word effectively.
+    </p>
+
+    <!-- How Hugging Face Perplexity Model Works -->
+    <h2>How does Hugging Face's Perplexity Model work?</h2>
+    <p>
+        Hugging Face's Perplexity Model is based on state-of-the-art language models that have been fine-tuned specifically for perplexity estimation. The model is pre-trained on a vast amount of text data and learns the probability distribution of words in various contexts. When given a sequence of words, the model predicts the probability of each word following the context provided by the previous words. The perplexity is then calculated based on these predicted probabilities.
+    </p>
+
+    <!-- What AI Text Perplexity Can Identify -->
+    <h2>What can Text Perplexity Identify in AI-generated Text?</h2>
+    <p>
+        Text perplexity can be an excellent tool to detect AI-generated text or text produced by language models. AI-generated text often exhibits lower perplexity scores since the models are designed to generate coherent and contextually relevant text. Conversely, human-written text may have higher perplexity scores due to the inherent variability and creativity in human language. By using the Hugging Face Perplexity Model, you can detect AI-generated text by comparing the perplexity scores against a predefined threshold.
+    </p>
+
+    <h3>Your results:</h3>
+    <p>Your perplexity result was: {{average_perplexity}}</p>
+
+    <!-- Button to Return to Index Page -->
+    <a href="/?return=1" class="btn btn-primary">Back to AVUS</a>
+</div>
+
+<!-- Add Bootstrap JS and jQuery -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> <!-- needs to be first-->
+<script src="js/bootstrap.min.js"></script>
+
+{% endblock %}
