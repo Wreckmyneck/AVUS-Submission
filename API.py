@@ -8,13 +8,20 @@ import requests
 
 app = Flask(__name__)
 
+#Function used to run the perplexity model for results, takes a text input
 def use_perplexity_model(text):
+   #Calls the method that splits the text into lines and gets perplexity values  for each lines alongside all the lines split
    perplexity_values, filtered_text = model1.split_lines(text)
+   #gets an average perplexity value based on every sentences perplexity
    average_perplexity = model1.average_line_perplexity(perplexity_values)
+   #gets a threshold value e.g. 1 (human written), 0.5 (human written AI modified), 0 (AI generated)
    threshold_value = model1.thresholds(average_perplexity)
+   #Determines which lines need highlighted as potentially machine written
    machine_lines = lines_to_highlight_as_machine_written(perplexity_values)
+   #Returns all the values from the model
    return average_perplexity, threshold_value,  machine_lines, filtered_text
 
+#calls the tfidf n-gram based model and gets a classification of 1 or 0
 def tf_idf_n_gram_model(text):
       model2_classification = model2.tf_idf_n_gram_model(text)
       return model2_classification
@@ -26,10 +33,12 @@ def tf_idf_model(text):
    model3_classification = model2.tfidf_model(text)
    return model3_classification
 
+#Calls the burstiness model, which processes the text and returns a classification of 1 or 0
 def burstiness_model(text):
     burstiness_model = burstiness.run_model(text)
     return burstiness_model
 
+#determines which lines need highlighted as machine written based on the passed values
 def lines_to_highlight_as_machine_written(values):
    machine_written_lines = []
    for index, value in enumerate(values):
@@ -37,7 +46,7 @@ def lines_to_highlight_as_machine_written(values):
          machine_written_lines.append(index)
    return machine_written_lines
 
-
+#This function is used to get all the results from all the models, and determine what the final classification of the text should be.
 def determine_result(perplexity_threshold_value, model2_classification, model3_classification, burstiness_classification):
    """
    Perplexity value is 1 for human, 0.5 for likely AI modified and 0 for AI, classification model 2 and 3 is binary 1 for human 0 for AI
@@ -59,6 +68,7 @@ def determine_result(perplexity_threshold_value, model2_classification, model3_c
       text = "Error occured please check results below for analysis"
    return text
 
+#The first end point that takes the json file, checks the apikey is valid and then processes the text to get results from all models and a final decision from voting system
 @app.route('/all_results', methods=['POST'])
 def all_results_endpoint():
     try:
@@ -107,6 +117,7 @@ def all_results_endpoint():
         print(e)
         return jsonify({"error": str(e)}), 500
 
+#this end point gets the data from the json file and checks if the apikey is valid, it then gets just the perplexity related results
 @app.route('/perplexity', methods=['POST'])
 def perplexity_endpoint():
     try:
@@ -129,7 +140,8 @@ def perplexity_endpoint():
             return jsonify({"error": "access denied"}), 500    
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    
+
+#this end point gets the data from the json file and checks if the apikey is valid, it then gets just the tfidf of n-grams related results    
 @app.route('/tfidfngram_classification', methods=['POST'])
 def tfidfngram_classification_endpoint():
     try:
@@ -155,6 +167,7 @@ def tfidfngram_classification_endpoint():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+#this end point gets the data from the json file and checks if the apikey is valid, it then gets just the tfidf related results
 @app.route('/tfidf_classification', methods=['POST'])
 def tfidf_classification_endpoint():
     try:
@@ -181,6 +194,7 @@ def tfidf_classification_endpoint():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+#this end point gets the data from the json file and checks if the apikey is valid, it then gets just the burstiness related results
 @app.route('/burstiness_classification', methods=['POST'])
 def burstiness_classification_endpoint():
     try:
@@ -206,7 +220,8 @@ def burstiness_classification_endpoint():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    
+
+#basic system used to check if a valid apikey was sent to this API.    
 def checkAPIkey(APIkey):
     #Implement in more detail if time, only basic implementation for now
     if APIkey == "securekey":

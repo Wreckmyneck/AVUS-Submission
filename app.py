@@ -163,35 +163,9 @@ def button_functions():
                                     "input_data":text,
                                     "apikey":"securekey"
                                  }
-                                 response = requests.post(api_url, json=data)
-                                 if response.status_code == 200:
-                                    result_json = response.json()
-                                    result = result_json["full_results"]
-                                    average_perplexity = result.get("average_perplexity")
-                                    threshold_value = result.get("threshold_value")
-                                    model2_binary_number = result.get("model2_binary_number")
-                                    model2_text = result.get("model2_text")
-                                    model2_probability = result.get("model2_probability")
-                                    model2_prob_AI = model2_probability[0][0]
-                                    model2_prob_human = model2_probability[0][1]
-                                    model3_binary_number = result.get("model3_binary_number")
-                                    model3_text = result.get("model3_text")
-                                    model3_probability = result.get("model3_probability")
-                                    model3_prob_AI = model3_probability[0][0]
-                                    model3_prob_human = model3_probability[0][1]
-                                    burstiness_binary_number = result.get("burstiness_number")
-                                    burstiness_probability = result.get("burstiness_probability")
-                                    burstiness_prob_AI = burstiness_probability[0][0]
-                                    burstiness_prob_human = burstiness_probability[0][1]
-                                    burstiness_text = result.get("burstiness_text")
-                                    machine_lines = result.get("machine_lines")
-                                    filtered_text = result.get("filtered_text")
-                                    final_result = result.get("main_result")
-                                    store_results(average_perplexity, final_result, model2_text, model3_text, burstiness_text, machine_lines, filtered_text, burstiness_prob_AI, burstiness_prob_human, model2_prob_AI, model2_prob_human, model3_prob_AI, model3_prob_human)
-                                    return render_template("index.html", average_perplexity=average_perplexity, final_result=final_result, model2_classification=model2_text, model2_prob_AI = model2_prob_AI, model2_prob_human = model2_prob_human, model3_classification=model3_text, model3_prob_AI = model3_prob_AI, model3_prob_human = model3_prob_human,burstiness_text = burstiness_text, burstiness_prob_AI = burstiness_prob_AI, burstiness_prob_human = burstiness_prob_human, machine_lines=machine_lines, filtered_text=filtered_text, file=True)
-                                 else:
-                                    flash('API error', 'inputerror')
-                                    return redirect(url_for('index'))  
+                                 getresults(api_url, data)
+                                 average_perplexity, final_result, model2_text, model3_text, burstiness_text, machine_lines, filtered_text, burstiness_prob_ai, burstiness_prob_human, model2_prob_ai, model2_prob_human, model3_prob_ai, model3_prob_human = display_result()
+                                 return render_template("index.html", average_perplexity=average_perplexity, final_result=final_result, model2_classification=model2_text, model2_prob_ai = model2_prob_ai, model2_prob_human = model2_prob_human, model3_classification=model3_text, model3_prob_ai = model3_prob_ai, model3_prob_human = model3_prob_human,burstiness_text = burstiness_text, burstiness_prob_ai = burstiness_prob_ai, burstiness_prob_human = burstiness_prob_human, machine_lines=machine_lines, filtered_text=filtered_text, file = True) 
                            elif file.filename.endswith('.docx'):
                               # Extract text from Docx
                               doc = Document(file)
@@ -208,37 +182,9 @@ def button_functions():
                                     "input_data":text,
                                     "apikey":"securekey"
                                  }
-                                 
-                                 response = requests.post(api_url, json=data)
-                                 print(response)
-                                 if response.status_code == 200:
-                                    result_json = response.json()
-                                    result = result_json["full_results"]
-                                    average_perplexity = result.get("average_perplexity")
-                                    threshold_value = result.get("threshold_value")
-                                    model2_binary_number = result.get("model2_binary_number")
-                                    model2_text = result.get("model2_text")
-                                    model2_probability = result.get("model2_probability")
-                                    model2_prob_AI = model2_probability[0][0]
-                                    model2_prob_human = model2_probability[0][1]
-                                    model3_binary_number = result.get("model3_binary_number")
-                                    model3_text = result.get("model3_text")
-                                    model3_probability = result.get("model3_probability")
-                                    model3_prob_AI = model3_probability[0][0]
-                                    model3_prob_human = model3_probability[0][1]
-                                    burstiness_binary_number = result.get("burstiness_number")
-                                    burstiness_probability = result.get("burstiness_probability")
-                                    burstiness_prob_AI = burstiness_probability[0][0]
-                                    burstiness_prob_human = burstiness_probability[0][1]
-                                    burstiness_text = result.get("burstiness_text")
-                                    machine_lines = result.get("machine_lines")
-                                    filtered_text = result.get("filtered_text")
-                                    final_result = result.get("main_result")
-                                    store_results(average_perplexity, final_result, model2_text, model3_text, burstiness_text, machine_lines, filtered_text, burstiness_prob_AI, burstiness_prob_human, model2_prob_AI, model2_prob_human, model3_prob_AI, model3_prob_human)
-                                    return render_template("index.html", average_perplexity=average_perplexity, final_result=final_result, model2_classification=model2_text, model2_prob_AI = model2_prob_AI, model2_prob_human = model2_prob_human, model3_classification=model3_text, model3_prob_AI = model3_prob_AI, model3_prob_human = model3_prob_human,burstiness_text = burstiness_text, burstiness_prob_AI = burstiness_prob_AI, burstiness_prob_human = burstiness_prob_human, machine_lines=machine_lines, filtered_text=filtered_text, file=True)
-                                 else:
-                                    flash('API error', 'inputerror')
-                                    return redirect(url_for('index'))  
+                                 getresults(api_url, data)
+                                 average_perplexity, final_result, model2_text, model3_text, burstiness_text, machine_lines, filtered_text, burstiness_prob_ai, burstiness_prob_human, model2_prob_ai, model2_prob_human, model3_prob_ai, model3_prob_human = display_result()
+                                 return render_template("index.html", average_perplexity=average_perplexity, final_result=final_result, model2_classification=model2_text, model2_prob_ai = model2_prob_ai, model2_prob_human = model2_prob_human, model3_classification=model3_text, model3_prob_ai = model3_prob_ai, model3_prob_human = model3_prob_human,burstiness_text = burstiness_text, burstiness_prob_ai = burstiness_prob_ai, burstiness_prob_human = burstiness_prob_human, machine_lines=machine_lines, filtered_text=filtered_text, file = True)  
                            elif file.filename.endswith('.txt'):
                               text = file.read().decode('utf-8')
                               character_count = len(text)
@@ -252,35 +198,9 @@ def button_functions():
                                     "input_data":text,
                                     "apikey":"securekey"
                                  }
-                                 response = requests.post(api_url, json=data)
-                                 if response.status_code == 200:
-                                    result_json = response.json()
-                                    result = result_json["full_results"]
-                                    average_perplexity = result.get("average_perplexity")
-                                    threshold_value = result.get("threshold_value")
-                                    model2_binary_number = result.get("model2_binary_number")
-                                    model2_text = result.get("model2_text")
-                                    model2_probability = result.get("model2_probability")
-                                    model2_prob_AI = model2_probability[0][0]
-                                    model2_prob_human = model2_probability[0][1]
-                                    model3_binary_number = result.get("model3_binary_number")
-                                    model3_text = result.get("model3_text")
-                                    model3_probability = result.get("model3_probability")
-                                    model3_prob_AI = model3_probability[0][0]
-                                    model3_prob_human = model3_probability[0][1]
-                                    burstiness_binary_number = result.get("burstiness_number")
-                                    burstiness_probability = result.get("burstiness_probability")
-                                    burstiness_prob_AI = burstiness_probability[0][0]
-                                    burstiness_prob_human = burstiness_probability[0][1]
-                                    burstiness_text = result.get("burstiness_text")
-                                    machine_lines = result.get("machine_lines")
-                                    filtered_text = result.get("filtered_text")
-                                    final_result = result.get("main_result")
-                                    store_results(average_perplexity, final_result, model2_text, model3_text, burstiness_text, machine_lines, filtered_text, burstiness_prob_AI, burstiness_prob_human, model2_prob_AI, model2_prob_human, model3_prob_AI, model3_prob_human)
-                                    return render_template("index.html", average_perplexity=average_perplexity, final_result=final_result, model2_classification=model2_text, model2_prob_AI = model2_prob_AI, model2_prob_human = model2_prob_human, model3_classification=model3_text, model3_prob_AI = model3_prob_AI, model3_prob_human = model3_prob_human,burstiness_text = burstiness_text, burstiness_prob_AI = burstiness_prob_AI, burstiness_prob_human = burstiness_prob_human, machine_lines=machine_lines, filtered_text=filtered_text, file=True)
-                                 else:
-                                    flash('API error', 'inputerror')
-                                    return redirect(url_for('index'))  
+                                 getresults(api_url, data)
+                                 average_perplexity, final_result, model2_text, model3_text, burstiness_text, machine_lines, filtered_text, burstiness_prob_ai, burstiness_prob_human, model2_prob_ai, model2_prob_human, model3_prob_ai, model3_prob_human = display_result()
+                                 return render_template("index.html", average_perplexity=average_perplexity, final_result=final_result, model2_classification=model2_text, model2_prob_ai = model2_prob_ai, model2_prob_human = model2_prob_human, model3_classification=model3_text, model3_prob_ai = model3_prob_ai, model3_prob_human = model3_prob_human,burstiness_text = burstiness_text, burstiness_prob_ai = burstiness_prob_ai, burstiness_prob_human = burstiness_prob_human, machine_lines=machine_lines, filtered_text=filtered_text, file = True)  
                      else:
                         flash('Please input a docx, pdf or txt file only', 'inputerror')
                         return redirect(url_for('index'))
@@ -301,36 +221,10 @@ def button_functions():
                            "input_data":text,
                            "apikey":"securekey"
                         }
-                        response = requests.post(api_url, json=data)
-                        if response.status_code == 200:
-                           result_json = response.json()
-                           result = result_json["full_results"]
-                           print(result)
-                           average_perplexity = result.get("average_perplexity")
-                           threshold_value = result.get("threshold_value")
-                           model2_binary_number = result.get("model2_binary_number")
-                           model2_text = result.get("model2_text")
-                           model2_probability = result.get("model2_probability")
-                           model2_prob_AI = model2_probability[0][0]
-                           model2_prob_human = model2_probability[0][1]
-                           model3_binary_number = result.get("model3_binary_number")
-                           model3_text = result.get("model3_text")
-                           model3_probability = result.get("model3_probability")
-                           model3_prob_AI = model3_probability[0][0]
-                           model3_prob_human = model3_probability[0][1]
-                           burstiness_binary_number = result.get("burstiness_number")
-                           burstiness_probability = result.get("burstiness_probability")
-                           burstiness_prob_AI = burstiness_probability[0][0]
-                           burstiness_prob_human = burstiness_probability[0][1]
-                           burstiness_text = result.get("burstiness_text")
-                           machine_lines = result.get("machine_lines")
-                           filtered_text = result.get("filtered_text")
-                           final_result = result.get("main_result")
-                           store_results(average_perplexity, final_result, model2_text, model3_text, burstiness_text, machine_lines, filtered_text, burstiness_prob_AI, burstiness_prob_human, model2_prob_AI, model2_prob_human, model3_prob_AI, model3_prob_human)
-                           return render_template("index.html", average_perplexity=average_perplexity, final_result=final_result, model2_classification=model2_text, model2_prob_AI = model2_prob_AI, model2_prob_human = model2_prob_human, model3_classification=model3_text, model3_prob_AI = model3_prob_AI, model3_prob_human = model3_prob_human,burstiness_text = burstiness_text, burstiness_prob_AI = burstiness_prob_AI, burstiness_prob_human = burstiness_prob_human, machine_lines=machine_lines, filtered_text=filtered_text, file=False)
-                        else:
-                           flash('API error', 'inputerror')
-                           return redirect(url_for('index'))  
+                        getresults(api_url, data)
+                        average_perplexity, final_result, model2_text, model3_text, burstiness_text, machine_lines, filtered_text, burstiness_prob_ai, burstiness_prob_human, model2_prob_ai, model2_prob_human, model3_prob_ai, model3_prob_human = display_result()
+                        return render_template("index.html", average_perplexity=average_perplexity, final_result=final_result, model2_classification=model2_text, model2_prob_ai = model2_prob_ai, model2_prob_human = model2_prob_human, model3_classification=model3_text, model3_prob_ai = model3_prob_ai, model3_prob_human = model3_prob_human,burstiness_text = burstiness_text, burstiness_prob_ai = burstiness_prob_ai, burstiness_prob_human = burstiness_prob_human, machine_lines=machine_lines, filtered_text=filtered_text, file=False)
+ 
                      elif character_count < 250:
                         flash('The text is too short. It must be a minimum of 250 characters', 'inputerror')
                         return redirect(url_for('index'))
@@ -372,13 +266,37 @@ def generate_random_string_for_session(length):
    characters = string.ascii_letters + string.digits
    return ''.join(random.choice(characters) for _ in range(length))
 
+def getresults(endpoint, data):
+   response = requests.post(endpoint, json=data)
+   if response.status_code == 200:
+      result_json = response.json()
+      result = result_json["full_results"]
+      print(result)
+      average_perplexity = result.get("average_perplexity")
+      threshold_value = result.get("threshold_value")
+      model2_binary_number = result.get("model2_binary_number")
+      model2_text = result.get("model2_text")
+      model2_probability = result.get("model2_probability")
+      model2_prob_AI = model2_probability[0][0]
+      model2_prob_human = model2_probability[0][1]
+      model3_binary_number = result.get("model3_binary_number")
+      model3_text = result.get("model3_text")
+      model3_probability = result.get("model3_probability")
+      model3_prob_AI = model3_probability[0][0]
+      model3_prob_human = model3_probability[0][1]
+      burstiness_binary_number = result.get("burstiness_number")
+      burstiness_probability = result.get("burstiness_probability")
+      burstiness_prob_AI = burstiness_probability[0][0]
+      burstiness_prob_human = burstiness_probability[0][1]
+      burstiness_text = result.get("burstiness_text")
+      machine_lines = result.get("machine_lines")
+      filtered_text = result.get("filtered_text")
+      final_result = result.get("main_result")
+      store_results(average_perplexity, final_result, model2_text, model3_text, burstiness_text, machine_lines, filtered_text, burstiness_prob_AI, burstiness_prob_human, model2_prob_AI, model2_prob_human, model3_prob_AI, model3_prob_human)
+   else:
+      flash('API error', 'inputerror')
+      return redirect(url_for('index')) 
 
-
-
-
-
-   
-   
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
