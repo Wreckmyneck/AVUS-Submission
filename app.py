@@ -106,7 +106,8 @@ def button_functions():
 
     # Handle POST request
     if request.method == 'POST':
-        apikey = request.form.get('apikeyinput') # for openai
+        apikey = request.form.get('apikeyinput') # for openai if input by user
+
         try:
             action = request.form.get('action')
 

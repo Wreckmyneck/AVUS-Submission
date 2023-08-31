@@ -4,14 +4,17 @@ import os
 import errorhandling
 
 from dotenv import load_dotenv, find_dotenv
+
 _ = load_dotenv(find_dotenv()) # read local .env file
+
 
 def inputkey(apikey):
     if(apikey != ""):
         openai.api_key = apikey
     else:
         openai.api_key  = os.getenv('OPENAI_API_KEY')
-        #openai.api_key = KEY VARIABLE HERe - do this later as mine runs out after 3 months, so it can be marked still. Input your own API key on website
+        
+
 
 def get_response(prompt, model, temperature = 0.7):
     try:
@@ -33,7 +36,7 @@ def get_response(prompt, model, temperature = 0.7):
             )
             return response.choices[0].text.strip()
     except openai.OpenAIError as authentication:
-        raise errorhandling.APIKeyAuthenticationErorr("The API key failed to authenticate with OpenaAI.")
+        raise errorhandling.APIKeyAuthenticationError("The API key failed to authenticate with OpenaAI.")
 
     
 
