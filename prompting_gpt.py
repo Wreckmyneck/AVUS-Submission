@@ -5,9 +5,11 @@ import errorhandling
 
 from dotenv import load_dotenv, find_dotenv
 
+#Loads the dotenv that stores the openai apikey
 _ = load_dotenv(find_dotenv()) # read local .env file
 
 
+#Checks if the user has passed an APIkey, if not it loads the one from the dotenv.
 def inputkey(apikey):
     if(apikey != ""):
         openai.api_key = apikey
@@ -15,7 +17,7 @@ def inputkey(apikey):
         openai.api_key  = os.getenv('OPENAI_API_KEY')
         
 
-
+#Creates a prompt for the request model with a passed temperature, then passes it to the OpenAI API to get a result
 def get_response(prompt, model, temperature = 0.7):
     try:
         messages = [{"role": "user", "content": prompt}]
@@ -40,7 +42,7 @@ def get_response(prompt, model, temperature = 0.7):
 
     
 
-
+#This function is used to make a text prompt
 def prompt(model):
     size = random.randrange(3, 5)
     topic = random.randrange(0, 15)

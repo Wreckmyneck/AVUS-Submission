@@ -111,7 +111,7 @@ def button_functions():
         try:
             action = request.form.get('action')
 
-            # Generate text using different models
+            # Generate text using different GPT models
             if action == 'Generate ChatGPT(3.5) Text':
                 print("Response may take some time")
                 prompter.inputkey(apikey)
@@ -147,7 +147,7 @@ def button_functions():
                      if file and allowed_file(file.filename):
                            filename = secure_filename(file.filename)
                            if file.filename.endswith('.pdf'):
-                              # Extract text from PDF
+                              # Extract text from PDF, and pass it to the function that calls teh api to get results, then display results.
                               pdf = PyPDF2.PdfReader(file)
                               text = ''
                               for page in range(len(pdf.pages)):
@@ -167,7 +167,7 @@ def button_functions():
                                  average_perplexity, final_result, model2_text, model3_text, burstiness_text, machine_lines, filtered_text, burstiness_prob_ai, burstiness_prob_human, model2_prob_ai, model2_prob_human, model3_prob_ai, model3_prob_human = display_result()
                                  return render_template("index.html", average_perplexity=average_perplexity, final_result=final_result, model2_classification=model2_text, model2_prob_ai = model2_prob_ai, model2_prob_human = model2_prob_human, model3_classification=model3_text, model3_prob_ai = model3_prob_ai, model3_prob_human = model3_prob_human,burstiness_text = burstiness_text, burstiness_prob_ai = burstiness_prob_ai, burstiness_prob_human = burstiness_prob_human, machine_lines=machine_lines, filtered_text=filtered_text, file = True) 
                            elif file.filename.endswith('.docx'):
-                              # Extract text from Docx
+                              # Extract text from Docx, and pass it to the function that calls teh api to get results, then display results.
                               doc = Document(file)
                               text = ""
                               for paragraph in doc.paragraphs:
@@ -192,7 +192,7 @@ def button_functions():
                                  flash('The text is too short. It must be a minimum of 250 characters', 'inputerror')
                                  return redirect(url_for('index'))
                               else:
-                                 # Process text using models and display results through API
+                                 # Process text using models and display results through API, and pass it to the function that calls teh api to get results, then display results.
                                  api_url = "http://127.0.0.1:5001/all_results"
                                  data = {
                                     "input_data":text,
@@ -211,7 +211,7 @@ def button_functions():
                      print(f"An error occurred: {str(e)}")
                      return redirect(url_for('index'))
                   
-                  # Handle text input
+                  # Handle text input, and pass it to the function that calls teh api to get results, then display results.
                elif text != '' and file.filename == '':
                   try:
                      character_count = len(text)
@@ -262,10 +262,12 @@ def button_functions():
     # Display the default template for GET requests
     return render_template("index.html")
 
+#This is used to generate a string for the session
 def generate_random_string_for_session(length):
    characters = string.ascii_letters + string.digits
    return ''.join(random.choice(characters) for _ in range(length))
 
+#This function is used to send json files to an end point, and get all the returned results from the endpoint, then store them as part of the session so they can be accessed on any page
 def getresults(endpoint, data):
    response = requests.post(endpoint, json=data)
    if response.status_code == 200:
@@ -297,10 +299,12 @@ def getresults(endpoint, data):
       flash('API error', 'inputerror')
       return redirect(url_for('index')) 
 
+#This is used to determine if a file type is allowed
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+#This function is used to store the values as part of the session under the same name
 def store_results(average_perplexity, final_result, model2_text, model3_text, burstiness_text, machine_lines, filtered_text, burstiness_prob_ai, burstiness_prob_human, model2_prob_ai, model2_prob_human, model3_prob_ai, model3_prob_human):
    # Store the variables in the session
     session['average_perplexity'] = average_perplexity
@@ -317,6 +321,7 @@ def store_results(average_perplexity, final_result, model2_text, model3_text, bu
     session['model3_prob_ai'] = model3_prob_ai
     session['model3_prob_human'] = model3_prob_human
 
+#This function is used to find the variables stored as part of the session, and return them when called.
 def display_result():
     # Retrieve the variables from the session
     average_perplexity = session.get('average_perplexity')
