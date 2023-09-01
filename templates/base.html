@@ -6,31 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" integrity="sha384-o+E1cu3M8tLLOdtYoJgY1B39lNj+SW2s2LOHZfSiqAA3Ll9M5VWOMcGjepPxIbt7" crossorigin="anonymous">
     <!-- Placeholder title that will be changed on each page to prevent needing to rewrite the whole thing-->
     <title>{% block title %} {% endblock %}</title>
     <title>{% block subtitle %} {% endblock %}</title>
+    
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" integrity="sha384-vDwDp0YO0C6wPGG8m1HYIVRnm1mf8o1u3o6/KSz5F6BMSsJ8cjrY7s5dqtMvzn2D" crossorigin="anonymous"></script>
     
   </head>
 
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ url_for('index')}}">AVUS</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="\about">About</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="\how-to">How To Use</a>
-                </li>
-            </ul>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('index')}}">AVUS</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="\about">About</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="\how-to">How To Use</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
     <div class="container-fluid">
@@ -42,8 +45,16 @@
         </div>
     </div>
 
-    <!-- Optional JavaScript -->
     
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Popper.js (required for Bootstrap) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <!-- <script src="{{ url_for('static', filename='js/scripts.js') }}"></script> -->
 </body>
 </html>
