@@ -105,10 +105,4 @@ def thresholds(averagePerplexity):
     value = 1
   return value
 
-"""
-def burstiness(perplexity_per_line):
-  burstiness = round(np.var(perplexity_per_line), 3)
-  return burstiness
-  #Look more into this (Current basis from checkGPT) This checks the variance from a specified axis
-"""
   
