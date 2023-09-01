@@ -107,7 +107,6 @@ def button_functions():
     # Handle POST request
     if request.method == 'POST':
         apikey = request.form.get('apikeyinput') # for openai if input by user
-
         try:
             action = request.form.get('action')
 
@@ -130,7 +129,7 @@ def button_functions():
                 promptmodel = "text-davinci-003"
                 response = prompter.prompt(promptmodel)
                 return render_template('index.html', response = response)
-            elif action == 'Generate GPT4 Text(Requires premium account api key)':
+            elif action == 'Generate GPT4 Text':
                 print("Response may take some time")
                 prompter.inputkey(apikey)
                 promptmodel = "gpt-4"

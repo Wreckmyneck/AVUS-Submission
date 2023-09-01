@@ -11,6 +11,7 @@ _ = load_dotenv(find_dotenv()) # read local .env file
 
 #Checks if the user has passed an APIkey, if not it loads the one from the dotenv.
 def inputkey(apikey):
+    print(apikey)
     if(apikey != ""):
         openai.api_key = apikey
     else:
