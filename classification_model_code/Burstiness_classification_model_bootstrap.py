@@ -18,8 +18,7 @@ import joblib
 def clean_content(text):
     if text is None:
         text = ''
-    # Lowercase conversion
-
+    text.replace("%%newline%%", "")
     return text
 
 def readfile(file_path):
