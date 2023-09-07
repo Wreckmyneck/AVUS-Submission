@@ -2,7 +2,7 @@
 
 
 
-### Software Requirements to Install
+### Software Requirements 
 To run the system locally the following software is required:
 markup: - A modern HTML5 browser. (Project was created using Firefox and tested with Chrome.
 -Python 3
