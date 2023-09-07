@@ -55,7 +55,7 @@ Markup: - The folder classification model code, contains all the code that was u
 - Expansion of the training dataset to include other available AI tools such as Google Bard
 - Research into more methods of detecting AI-generated text. Some examples:
   - Fine-tuning a GPT or BERT model at classifying text (Attempts were made but failed to pan out)
-  - Exploration into more features that could be used to detect the text such as lingustics, syntax or grammar
+  - Exploration into more features that could be used to detect the text such as linguistics, syntax or grammar
   - Exploration into using Cosine Similiarity
   - Sentiment analysis
   - Unsupervised anomoly detection that can be used to detect any deviations from the norm.
