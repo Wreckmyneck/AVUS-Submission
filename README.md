@@ -2,8 +2,8 @@
 Installation instructions
 
 To run the system locally the following software is required:
--1.	A modern HTML5 browser. (Project was created using Firefox and tested with Chrome.
--2.	Python 3
+- 1.	A modern HTML5 browser. (Project was created using Firefox and tested with Chrome.
+- 2.	Python 3
 -3.	Visual Studio code
   -a.	VS Code Python extension:
   -b.	Guide for setting Python up in VS Code: https://code.visualstudio.com/docs/python/python-tutorial
