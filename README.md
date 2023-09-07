@@ -61,6 +61,6 @@ Markup: - The folder classification model code, contains all the code that was u
   - Unsupervised anomoly detection that can be used to detect any deviations from the norm.
  
 ## Demo Video
+https://youtu.be/5FJ_l_gg9F8
 
-[![Demo Video of AVUS]](https://youtu.be/5FJ_l_gg9F8)
 
