@@ -1,6 +1,8 @@
 # AVUS-Submission
-Installation instructions
 
+
+
+### Software Requirements to Install
 To run the system locally the following software is required:
 markup: - 1.	A modern HTML5 browser. (Project was created using Firefox and tested with Chrome.
 - 2.	Python 3
@@ -13,6 +15,7 @@ markup: - 1.	A modern HTML5 browser. (Project was created using Firefox and test
   - c.	https://developer.nvidia.com/cuda-toolkit
 - 5.	Installed all the libraries listed in requirement.txt 
 
+### Installation instructions
 Once the above software is installed, follow the instructions below (Only tested for windows):
 Markup: - 1)	Extract the compressed files while maintaining the file structure.
 - 2)	Open Visual Studio Code, click the “File” button on the top bar and go down to “Open Folder…”
