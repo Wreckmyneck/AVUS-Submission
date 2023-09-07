@@ -1,6 +1,6 @@
 # AVUS-Submission
 
-## AVUS(AI-Generated Vs Human-Written Text Detection)
+## AVUS(AI-Generated Vs Human-Written Text Detection Software)
 AVUS contains a webapp for user interaction and an API for integration between the webapp and text detection models. There are currently four different models implemented which are Term-Frequency-Inverse-Document-Frequency with uni-grams and bi-grams, Term-Frequency-Inverse-Document-Frequency with raw Text input, and Burstiness model (sentence lengths made into a frequency distrubution and flattened into features). The current models are trained on abstracts, news articles, Blogger posts, short stories, and reviews (tripadvisor hotels) with GPT generated text and human sources.
 
 ## Motivation
