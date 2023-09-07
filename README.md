@@ -4,7 +4,7 @@
 AVUS contains a webapp for user interaction and an API for integration between the webapp and text detection models. There are currently four different models implemented which are Term-Frequency-Inverse-Document-Frequency with uni-grams and bi-grams, Term-Frequency-Inverse-Document-Frequency with raw Text input, and Burstiness model (sentence lengths made into a frequency distrubution and flattened into features). The current models are trained on abstracts, news articles, Blogger posts, short stories, and reviews (tripadvisor hotels) with GPT generated text and human sources.
 
 ## Motivation
-AI-generation of Text has gotten more and more popular recently with tools such as ChatGPT being released with tools such as these it is important that there is an ability to tell the difference between human-written text and AI-generated text. Tools have become available such as GPTZero, ZeroGPT and more, except they don't reveal the methods behind their detection software. It was also motivated as a project for the completion of MSc. in Software Systems Development at Queen's University Belfast, alongside a personal interest in the topic.
+AI-generation of Text has gotten more and more popular recently with tools such as ChatGPT being released. With these tools it is important that there is an ability to tell the difference between human-written text and AI-generated text. Tools have become available such as GPTZero, ZeroGPT and more, except they don't reveal the methods behind their detection software. It was also motivated as a project for the completion of MSc. in Software Systems Development at Queen's University Belfast, alongside a personal interest in the topic.
 
 ## Install Guide
 ### Software Requirements 
