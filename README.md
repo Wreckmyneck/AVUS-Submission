@@ -1,7 +1,12 @@
 # AVUS-Submission
 
+## AVUS(AI-Generated Vs Human-Written Text Detection)
+AVUS contains a webapp for user interaction and an API for integration between the webapp and text detection models. There are currently four different models implemented which are Term-Frequency-Inverse-Document-Frequency with uni-grams and bi-grams, Term-Frequency-Inverse-Document-Frequency with raw Text input, and Burstiness model (sentence lengths made into a frequency distrubution and flattened into features). The current models are trained on abstracts, news articles, Blogger posts, short stories, and reviews (tripadvisor hotels) with GPT generated text and human sources.
 
+## Motivation
+AI-generation of Text has gotten more and more popular recently with tools such as ChatGPT being released with tools such as these it is important that there is an ability to tell the difference between human-written text and AI-generated text. Tools have become available such as GPTZero, ZeroGPT and more, except they don't reveal the methods behind their detection software. It was also motivated as a project for the completion of MSc. in Software Systems Development at Queen's University Belfast, alongside a personal interest in the topic.
 
+## Install Guide
 ### Software Requirements 
 To run the system locally the following software is required:
 markup: - A modern HTML5 browser. (Project was created using Firefox and tested with Chrome.
@@ -33,3 +38,24 @@ Markup: - Extract the compressed files while maintaining the file structure.
   - a.	http://127.0.0.1:5000/
 - The API is called by the webapp when used, or if required can be accessed through apps such as Postman provided a Json file is included with the end point
   - a.	End point example: http://127.0.0.1:5001/all_results
+ 
+## Overview/Breakdown
+Markup: - The folder classification model code, contains all the code that was used to train the three classification models.
+- Dataset contains the two datasets used to train the three classification models, as well as two datasets used to validate the entire system.
+- The static folder contains the styles.css and templates contain all the .html files that implement JavaScript and Jinja2 code. The templates all use the base.html and use block insertions.
+- Testing contains two files that were used to test the system alongside the excel file that stored the results
+- The folder "Failed" contains attempted routes to improve upon the classification but the experiments failed. The code is lacking improvement/refinement and lacking comments due to time-frame.
+- The folder "trained_classification_models" contains all the binary classification models that are currently implemented into the system.
+- app.py contains all the code that is used to run the webapp side of the project. It has a series of routes that handle serving different webpages based on the url. The post handles the generate text and process button. The generate text buttons sends a call to the prompt_gpt.py that handles everything from determing what APIkey to use, to making a prompt, and sending it back to be displayed. The process text figures out whether it is a file or text input, if it is a file it figures which type it is, converts it into a string called text. The text string from the file reading or textbox input are then put in a Json file with the secure key, sent to the function that handles the API calls, results are returned which are stroed in sessions and another function is used to get the results from the session and display to user. Sessions are used to store results so users can navigate to different pages and return to their results as needed.
+- API.py contains all the endpoint routes for the API, as well as multiple functions that handle the different types of models that the text needs to be run through.
+- There are currently four models used in the classification Perplexity which utilizes HuggingFaces model, Term-Frequency-Inverse-Document-Frequency of Unigrams and bi-grams, Term-Frequency-Inverse-Document-Frequency of raw text, and burstiness based on sentence length distrubutions in the text.
+
+## Potential Improvements
+- Expansion of the training dataset to include more topic areas rather than the ones listed above.
+- Expansion of the training dataset to include other available AI tools such as Google Bard
+- Research into more methods of detecting AI-generated text. Some examples:
+  - Fine-tuning a GPT or BERT model at classifying text (Attempts were made but failed to pan out)
+  - Exploration into more features that could be used to detect the text such as lingustics, syntax or grammar
+  - Exploration into using Cosine Similiarity
+  - Sentiment analysis
+  - Unsupervised anomoly detection that can be used to detect any deviations from the norm.
