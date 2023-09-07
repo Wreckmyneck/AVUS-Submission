@@ -29,8 +29,8 @@ def readfile(file_path):
     return content_column
 
 # File paths
-human_file_path = r"Datasets\human_merged.csv"
-ai_file_path = r"Datasets\generated_merged.csv"
+human_file_path = r"Datasets\Main_training_human_text.csv"
+ai_file_path = r"Datasets\Main_training_AI_text.csv"
 
 # Read and preprocess data
 human_written_text = readfile(human_file_path)[1:]

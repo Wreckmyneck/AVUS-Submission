@@ -79,6 +79,7 @@ def all_results_endpoint():
             if input_text is None or len(input_text) < 250:
                 return jsonify({"error": " 'text' parameter missing or too short"}), 400
             else:
+                #This gets all the results from the appropriate model by passing the text to the function controlling it
                 average_perplexity, threshold_value,  machine_lines, filtered_text = use_perplexity_model(input_text)
                 model2_all = tf_idf_n_gram_model(input_text)
                 model2_number = model2_all[0].tolist()
@@ -92,7 +93,6 @@ def all_results_endpoint():
                 burstiness_number = burstiness_all[0].tolist()
                 burstiness_text = burstiness_all[1]
                 burstiness_probability = burstiness_all[2].tolist()
-                print(burstiness_text)
                 main_result = determine_result(threshold_value, model2_all, model3_all, burstiness_all)
                 result = {
                 "average_perplexity": average_perplexity,
